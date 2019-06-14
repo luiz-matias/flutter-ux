@@ -1,2 +1,2 @@
 # flutter-learning
-Personal project dedicated to study purposes.
+Personal project dedicated for study purposes.
