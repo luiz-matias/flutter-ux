@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'pages/login_page.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -8,13 +10,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'My Notes',
       theme: ThemeData(
-        primaryColor: Colors.blue,
-      ),
-      home: Container(
-        color: Colors.white,
-      ),
+          primaryColor: Colors.deepPurple,
+          accentColor: Colors.deepPurpleAccent),
+      home: LoginPage(),
     );
   }
 }
