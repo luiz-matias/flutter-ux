@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_app/models/user.dart';
 
-class UserInfo extends StatefulWidget {
+class UserInfo extends StatelessWidget {
   final User _user;
 
   UserInfo(this._user);
-
-  @override
-  _UserInfoState createState() => _UserInfoState(_user);
-}
-
-class _UserInfoState extends State<UserInfo> {
-  final User _user;
-
-  _UserInfoState(this._user);
 
   @override
   Widget build(BuildContext context) {

@@ -20,7 +20,7 @@ class UserRepositoryMock implements UserRepository {
       String profilePicture =
           "https://randomuser.me/api/portraits/men/$randomNumber.jpg";
       return User(
-          name: "Luiz Matias", age: 20, profilePictureUrl: profilePicture);
+          name: "Luiz Matias", age: 20 + Random().nextInt(15), profilePictureUrl: profilePicture);
     });
   }
 }
