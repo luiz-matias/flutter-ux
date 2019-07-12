@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/blocs/bloc.dart';
-import 'package:flutter_bloc_app/models/user.dart';
+
+import 'UserInfo.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -27,8 +28,21 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Widget _body() {
-    return SizedBox.expand(
-      child: Center(
+    return Center(
+      child: BlocListener(
+        bloc: _userBloc,
+        listener: (BuildContext context, UserState state) {
+          if (state is LoadedUserState) {
+            print("User refreshed!");
+            return Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text(
+                "User refreshed!",
+                textAlign: TextAlign.center,
+              ),
+              duration: Duration(seconds: 2),
+            ));
+          }
+        },
         child: BlocBuilder(
           bloc: _userBloc,
           builder: (BuildContext context, UserState state) {
@@ -37,44 +51,11 @@ class _SplashPageState extends State<SplashPage> {
             } else if (state is LoadingUserState) {
               return _loading();
             } else if (state is LoadedUserState) {
-              return _userProfile(state.user);
+              return UserInfo(state.user);
             }
           },
         ),
       ),
-    );
-  }
-
-  _userProfile(User data) {
-    print("Profile picture Url: " + data.profilePictureUrl);
-    return Column(
-      children: <Widget>[
-        Image.network(
-          data.profilePictureUrl,
-          width: 128,
-          height: 128,
-          fit: BoxFit.contain,
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        Text(
-          data.name,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
-        ),
-        SizedBox(
-          height: 4,
-        ),
-        Text(
-          "${data.age} anos",
-          style: TextStyle(
-            fontSize: 16,
-          ),
-        ),
-      ],
     );
   }
 

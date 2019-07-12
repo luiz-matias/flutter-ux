@@ -22,7 +22,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   Future<User> getRandomUser() {
-    return Future.delayed(Duration(seconds: 2), () {
+    return Future.delayed(Duration(seconds: 1), () {
       int randomNumber = 1 + Random().nextInt(30);
       String profilePicture =
           "https://randomuser.me/api/portraits/men/$randomNumber.jpg";
