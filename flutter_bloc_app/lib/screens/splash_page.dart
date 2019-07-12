@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/blocs/bloc.dart';
 
-import 'UserInfo.dart';
+import 'package:flutter_bloc_app/widgets/UserInfo.dart';
 
 class SplashPage extends StatefulWidget {
   @override
