@@ -18,14 +18,13 @@ class _StoriesState extends State<Stories> {
               scrollDirection: Axis.horizontal,
               children: <Widget>[
                 _myStoryItem(),
-                _storyItem(),
-                _storyItem(),
-                _storyItem(),
-                _storyItem(),
-                _storyItem(),
-                _storyItem(),
-                _storyItem(),
-                _storyItem(),
+                _storyItem("sampleuser", "https://randomuser.me/api/portraits/men/27.jpg"),
+                _storyItem("otheruser", "https://randomuser.me/api/portraits/men/91.jpg"),
+                _storyItem("moreuser", "https://randomuser.me/api/portraits/women/60.jpg"),
+                _storyItem("heyguys", "https://randomuser.me/api/portraits/women/58.jpg"),
+                _storyItem("flutter", "https://randomuser.me/api/portraits/women/27.jpg"),
+                _storyItem("is", "https://randomuser.me/api/portraits/men/51.jpg"),
+                _storyItem("awesome", "https://randomuser.me/api/portraits/men/60.jpg"),
               ],
             ),
           ),
@@ -86,7 +85,7 @@ class _StoriesState extends State<Stories> {
     );
   }
 
-  Widget _storyItem() {
+  Widget _storyItem(String username, String profilePicture) {
     return Container(
       width: 84,
       color: Colors.white,
@@ -98,13 +97,13 @@ class _StoriesState extends State<Stories> {
             CircleAvatar(
               radius: 32,
               backgroundImage: NetworkImage(
-                  "https://avatars3.githubusercontent.com/u/29527763?s=460&v=4"),
+                  profilePicture),
             ),
             SizedBox(
               height: 6,
             ),
             Text(
-              "_luizmatias",
+              username,
               style: TextStyle(fontSize: 10),
               overflow: TextOverflow.ellipsis,
             ),
