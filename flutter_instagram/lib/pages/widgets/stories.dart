@@ -9,7 +9,7 @@ class _StoriesState extends State<Stories> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 102,
       color: Colors.white,
       child: Column(
         children: <Widget>[
@@ -18,13 +18,41 @@ class _StoriesState extends State<Stories> {
               scrollDirection: Axis.horizontal,
               children: <Widget>[
                 _myStoryItem(),
-                _storyItem("sampleuser", "https://randomuser.me/api/portraits/men/27.jpg"),
-                _storyItem("otheruser", "https://randomuser.me/api/portraits/men/91.jpg"),
-                _storyItem("moreuser", "https://randomuser.me/api/portraits/women/60.jpg"),
-                _storyItem("heyguys", "https://randomuser.me/api/portraits/women/58.jpg"),
-                _storyItem("flutter", "https://randomuser.me/api/portraits/women/27.jpg"),
-                _storyItem("is", "https://randomuser.me/api/portraits/men/51.jpg"),
-                _storyItem("awesome", "https://randomuser.me/api/portraits/men/60.jpg"),
+                _storyItem(
+                  "sampleuser",
+                  "https://randomuser.me/api/portraits/men/27.jpg",
+                  false,
+                ),
+                _storyItem(
+                  "otheruser",
+                  "https://randomuser.me/api/portraits/men/91.jpg",
+                  false,
+                ),
+                _storyItem(
+                  "moreuser",
+                  "https://randomuser.me/api/portraits/women/60.jpg",
+                  false,
+                ),
+                _storyItem(
+                  "heyguys",
+                  "https://randomuser.me/api/portraits/women/58.jpg",
+                  true,
+                ),
+                _storyItem(
+                  "flutter",
+                  "https://randomuser.me/api/portraits/women/27.jpg",
+                  true,
+                ),
+                _storyItem(
+                  "is",
+                  "https://randomuser.me/api/portraits/men/51.jpg",
+                  true,
+                ),
+                _storyItem(
+                  "awesome",
+                  "https://randomuser.me/api/portraits/men/60.jpg",
+                  true,
+                ),
               ],
             ),
           ),
@@ -61,7 +89,7 @@ class _StoriesState extends State<Stories> {
                   ),
                   Text(
                     "Your Story",
-                    style: TextStyle(fontSize: 10),
+                    style: TextStyle(fontSize: 12),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
@@ -85,7 +113,7 @@ class _StoriesState extends State<Stories> {
     );
   }
 
-  Widget _storyItem(String username, String profilePicture) {
+  Widget _storyItem(String username, String profilePicture, bool storySeen) {
     return Container(
       width: 84,
       color: Colors.white,
@@ -94,17 +122,47 @@ class _StoriesState extends State<Stories> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            CircleAvatar(
-              radius: 32,
-              backgroundImage: NetworkImage(
-                  profilePicture),
+            Container(
+              width: 64,
+              height: 64,
+              child: Stack(
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: storySeen
+                              ? LinearGradient(
+                                  colors: [Colors.grey, Colors.grey])
+                              : LinearGradient(colors: [
+                                  Colors.deepOrange,
+                                  Colors.deepPurple
+                                ])),
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      width: storySeen ? 62 : 60,
+                      height: storySeen ? 62 : 60,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.white),
+                    ),
+                  ),
+                  Center(
+                    child: CircleAvatar(
+                      radius: 28,
+                      backgroundImage: NetworkImage(profilePicture),
+                    ),
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 6,
             ),
             Text(
               username,
-              style: TextStyle(fontSize: 10),
+              style: TextStyle(fontSize: 12),
               overflow: TextOverflow.ellipsis,
             ),
           ],

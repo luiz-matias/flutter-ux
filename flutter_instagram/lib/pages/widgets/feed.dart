@@ -103,7 +103,7 @@ class _FeedState extends State<Feed> {
                 SizedBox(
                   width: 16,
                 ),
-                Icon(Icons.message),
+                Icon(Icons.send),
                 Expanded(
                   child: Container(),
                 ),

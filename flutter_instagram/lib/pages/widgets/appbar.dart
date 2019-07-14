@@ -14,9 +14,9 @@ class CustomAppBar extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: <Widget>[
-                  Icon(Icons.camera_alt),
+                  Icon(Icons.photo_camera),
                   SizedBox(
-                    width: 8,
+                    width: 16,
                   ),
                   Expanded(
                     child: Text(
@@ -26,13 +26,13 @@ class CustomAppBar extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 8,
+                    width: 16,
                   ),
-                  Icon(Icons.video_library),
+                  Icon(Icons.ondemand_video),
                   SizedBox(
-                    width: 8,
+                    width: 16,
                   ),
-                  Icon(Icons.message),
+                  Icon(Icons.send),
                 ],
               ),
             ),
