@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/pages/widgets/appbar.dart';
 import 'package:flutter_instagram/pages/widgets/feed.dart';
-import 'package:flutter_instagram/pages/widgets/navbar.dart';
 import 'package:flutter_instagram/pages/widgets/stories.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +26,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            CustomNavBar(),
           ],
         ),
       ),

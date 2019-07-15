@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'navbar_enum.dart';
 
 class CustomNavBar extends StatefulWidget {
+
+  ValueChanged<CustomNavBarItem> onTap;
+
+
+  CustomNavBar({this.onTap});
+
   @override
-  _CustomNavBarState createState() => _CustomNavBarState();
+  _CustomNavBarState createState() => _CustomNavBarState(onTap);
 }
 
 class _CustomNavBarState extends State<CustomNavBar> {
   int index = 0;
+  ValueChanged<CustomNavBarItem> onTap;
+
+
+  _CustomNavBarState(this.onTap);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +31,23 @@ class _CustomNavBarState extends State<CustomNavBar> {
         type: BottomNavigationBarType.fixed,
         currentIndex: index,
         onTap: (int index) {
+          switch (index) {
+            case 0:
+              onTap(CustomNavBarItem.Home);
+              break;
+            case 1:
+              onTap(CustomNavBarItem.Search);
+              break;
+            case 2:
+              onTap(CustomNavBarItem.Add);
+              break;
+            case 3:
+              onTap(CustomNavBarItem.Notifications);
+              break;
+            case 4:
+              onTap(CustomNavBarItem.Profile);
+              break;
+          }
           setState(() {
             this.index = index;
           });
