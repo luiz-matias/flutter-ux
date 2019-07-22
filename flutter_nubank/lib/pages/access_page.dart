@@ -137,6 +137,7 @@ class _AccessPageState extends State<AccessPage> {
   _openLoginPage(BuildContext context) {
     showModalBottomSheetApp(
         context: context,
+        resizeToAvoidBottomPadding: true,
         builder: (context) {
           return LoginPage();
         });
