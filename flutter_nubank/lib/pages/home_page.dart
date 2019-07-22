@@ -6,10 +6,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _currentPage = 1;
+  PageController _verticalViewPagerController = PageController(initialPage: 1);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple,
+      backgroundColor: Color(0xFF8A05BE),
       body: Stack(
         children: <Widget>[
           Positioned(
@@ -31,42 +34,64 @@ class _HomePageState extends State<HomePage> {
   }
 
   _titleBar() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 38),
-      child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                "assets/images/logo-nu.png",
-                color: Colors.white,
-                width: 48,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                "Luiz Matias",
-                style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          Icon(
-            Icons.keyboard_arrow_down,
-            color: Colors.grey[300],
-          )
-        ],
+    return GestureDetector(
+      onTap: () {
+        if (_currentPage == 0)
+          _verticalViewPagerController.animateToPage(1,
+              curve: Curves.easeOutBack, duration: Duration(milliseconds: 500));
+        else
+          _verticalViewPagerController.animateToPage(0,
+              curve: Curves.easeOutBack, duration: Duration(milliseconds: 500));
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 38),
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  "assets/images/logo-nu.png",
+                  color: Colors.white,
+                  width: 48,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Luiz Matias",
+                  style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            _currentPage == 0
+                ? Icon(
+                    Icons.keyboard_arrow_up,
+                    color: Colors.grey[300],
+                  )
+                : Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.grey[300],
+                  )
+          ],
+        ),
       ),
     );
   }
 
   _pageViews() {
     return PageView(
+      physics: BouncingScrollPhysics(),
+      onPageChanged: (page) {
+        setState(() {
+          _currentPage = page;
+        });
+      },
+      controller: _verticalViewPagerController,
       scrollDirection: Axis.vertical,
       children: <Widget>[
         _profile(),
@@ -323,7 +348,9 @@ class _HomePageState extends State<HomePage> {
               borderSide: BorderSide(
                 color: Color.fromARGB(160, 255, 255, 255),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: Text(
                 "Sair da conta".toUpperCase(),
                 style: TextStyle(
