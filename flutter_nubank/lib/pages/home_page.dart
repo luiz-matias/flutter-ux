@@ -28,6 +28,21 @@ class _HomePageState extends State<HomePage> {
             bottom: 0,
             child: _pageViews(),
           ),
+          Positioned(
+            top: 116,
+            left: 0,
+            right: 0,
+            child: Container(
+              width: double.infinity,
+              height: 20,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Color(0xFF8A05BE), Color(0x008A05BE)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -38,10 +53,10 @@ class _HomePageState extends State<HomePage> {
       onTap: () {
         if (_currentPage == 0)
           _verticalViewPagerController.animateToPage(1,
-              curve: Curves.easeOutBack, duration: Duration(milliseconds: 500));
+              curve: Curves.easeInOut, duration: Duration(milliseconds: 500));
         else
           _verticalViewPagerController.animateToPage(0,
-              curve: Curves.easeOutBack, duration: Duration(milliseconds: 500));
+              curve: Curves.easeInOut, duration: Duration(milliseconds: 500));
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 38),
@@ -98,7 +113,7 @@ class _HomePageState extends State<HomePage> {
         Stack(
           children: <Widget>[
             Positioned(
-              top: 0,
+              top: 16,
               left: 0,
               right: 0,
               child: Container(
@@ -109,15 +124,15 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(left: 16, right: 16),
-                      child: Card(),
+                      child: _creditCard(),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 16, right: 16),
-                      child: Container(height: 100, child: Card()),
+                      child: _nuAccount(),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 16, right: 16),
-                      child: Container(height: 100, child: Card()),
+                      child: _nuRewards(),
                     ),
                   ],
                 ),
@@ -164,7 +179,7 @@ class _HomePageState extends State<HomePage> {
 
   _profile() {
     return Padding(
-      padding: const EdgeInsets.only(left: 32, right: 32),
+      padding: const EdgeInsets.only(left: 32, right: 32, top: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -363,5 +378,149 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  _creditCard() {
+    return Card(
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            top: 16,
+            left: 16,
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.credit_card,
+                  color: Colors.grey[500],
+                  size: 36,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Cartão de crédito",
+                  style: TextStyle(fontSize: 20, color: Colors.grey[500]),
+                )
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment(-1, -0.25),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Fatura atual".toUpperCase(),
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.lightBlueAccent,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "R\$ ",
+                          style: TextStyle(
+                            fontSize: 38,
+                            color: Colors.lightBlueAccent,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "204",
+                          style: TextStyle(
+                            fontSize: 38,
+                            color: Colors.lightBlueAccent,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ",50",
+                          style: TextStyle(
+                            fontSize: 38,
+                            color: Colors.lightBlueAccent,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Limite disponível ",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "R\$ 1395,50",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.lightGreen,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 100,
+              decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(4),
+                      bottomRight: Radius.circular(4))),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Icon(
+                      Icons.directions_car,
+                      size: 36,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                  LimitedBox(
+                      maxWidth: 180,
+                      child: Text(
+                          "Compra mais recente em Uber no valor de R\$ 11,40 hoje", textAlign: TextAlign.start,)),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 8),
+                    child: Icon(
+                      Icons.keyboard_arrow_right,
+                      size: 36,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _nuAccount() {
+    return Card();
+  }
+
+  _nuRewards() {
+    return Card();
   }
 }
