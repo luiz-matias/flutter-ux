@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF8A05BE),
+      backgroundColor: Color(0xFF7F269D),
       body: Stack(
         children: <Widget>[
           Positioned(
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               height: 20,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [Color(0xFF8A05BE), Color(0x008A05BE)],
+                    colors: [Color(0xFF7F269D), Color(0x007F269D)],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter),
               ),
@@ -95,85 +95,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-    );
-  }
-
-  _pageViews() {
-    return PageView(
-      physics: BouncingScrollPhysics(),
-      onPageChanged: (page) {
-        setState(() {
-          _currentPage = page;
-        });
-      },
-      controller: _verticalViewPagerController,
-      scrollDirection: Axis.vertical,
-      children: <Widget>[
-        _profile(),
-        Stack(
-          children: <Widget>[
-            Positioned(
-              top: 16,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 380,
-                width: MediaQuery.of(context).size.width,
-                child: PageView(
-                  physics: BouncingScrollPhysics(),
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: 16, right: 16),
-                      child: _creditCard(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 16, right: 16),
-                      child: _nuAccount(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 16, right: 16),
-                      child: _nuRewards(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 16,
-              left: 0,
-              right: 0,
-              child: _options(),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  _options() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: <Widget>[
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: Card(
-              color: Color.fromARGB(100, 255, 255, 255),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _points() {
-    return Row(
-      children: <Widget>[
-        Icon(Icons.control_point),
-        Icon(Icons.control_point),
-        Icon(Icons.control_point)
-      ],
     );
   }
 
@@ -380,6 +301,58 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  _pageViews() {
+    return PageView(
+      physics: BouncingScrollPhysics(),
+      onPageChanged: (page) {
+        setState(() {
+          _currentPage = page;
+        });
+      },
+      controller: _verticalViewPagerController,
+      scrollDirection: Axis.vertical,
+      children: <Widget>[
+        _profile(),
+        Stack(
+          children: <Widget>[
+            Positioned(
+              top: 16,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 380,
+                width: MediaQuery.of(context).size.width,
+                child: PageView(
+                  physics: BouncingScrollPhysics(),
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      child: _creditCard(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      child: _nuAccount(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      child: _nuRewards(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 16,
+              left: 0,
+              right: 0,
+              child: _options(),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   _creditCard() {
     return Card(
       child: Stack(
@@ -498,7 +471,9 @@ class _HomePageState extends State<HomePage> {
                   LimitedBox(
                       maxWidth: 180,
                       child: Text(
-                          "Compra mais recente em Uber no valor de R\$ 11,40 hoje", textAlign: TextAlign.start,)),
+                        "Compra mais recente em Uber no valor de R\$ 11,40 hoje",
+                        textAlign: TextAlign.start,
+                      )),
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 8),
                     child: Icon(
@@ -511,16 +486,486 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+          Positioned(
+              right: 16,
+              top: 16,
+              bottom: 116,
+              child: Container(
+                height: double.infinity,
+                width: 8,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                ),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Container(
+                          height: constraints.maxHeight * 0.13,
+                          width: 8,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(4),
+                                  topLeft: Radius.circular(4)),
+                              color: Colors.blueAccent),
+                        ),
+                        Container(
+                          height: constraints.maxHeight * 0.87,
+                          width: 8,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(4),
+                                  bottomRight: Radius.circular(4)),
+                              color: Colors.green),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              )),
         ],
       ),
     );
   }
 
   _nuAccount() {
-    return Card();
+    return Card(
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            top: 16,
+            left: 16,
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.monetization_on,
+                  color: Colors.grey[500],
+                  size: 36,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "NuConta",
+                  style: TextStyle(fontSize: 20, color: Colors.grey[500]),
+                )
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment(-1, -0.25),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Saldo disponível",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                  Text(
+                    "R\$ 998,74",
+                    style: TextStyle(
+                      fontSize: 38,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 100,
+              decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(4),
+                      bottomRight: Radius.circular(4))),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Icon(
+                      Icons.fastfood,
+                      size: 36,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                  LimitedBox(
+                      maxWidth: 180,
+                      child: Text(
+                        "Compra mais recente em Cafeteria do Viajante no valor de R\$ 11,40 hoje",
+                        textAlign: TextAlign.start,
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 8),
+                    child: Icon(
+                      Icons.keyboard_arrow_right,
+                      size: 36,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            right: 32,
+            top: 24,
+            child: Icon(
+              Icons.remove_red_eye,
+              color: Colors.grey,
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   _nuRewards() {
-    return Card();
+    return Card(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Icon(
+            Icons.card_giftcard,
+            size: 32,
+          ),
+          Text(
+            "Nubank Rewards",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 64, right: 64),
+            child: Text(
+              "Acumule pontos que nunca expiram e troque por passagens aéreas ou serviços que você realmente usa.",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 64, right: 64),
+            child: Container(
+              height: 50,
+              width: double.infinity,
+              child: OutlineButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                borderSide: BorderSide(
+                  color: Color(0xFF7F269D),
+                ),
+                onPressed: () {},
+                child: Text(
+                  "Ative o seu rewards".toUpperCase(),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF7F269D),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _points() {
+    return Row(
+      children: <Widget>[
+        Icon(Icons.control_point),
+        Icon(Icons.control_point),
+        Icon(Icons.control_point)
+      ],
+    );
+  }
+
+  _options() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: SizedBox(
+              width: 100,
+              height: 100,
+              child: Card(
+                elevation: 0,
+                color: Color.fromARGB(50, 255, 255, 255),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      top: 8,
+                      left: 8,
+                      child: Icon(
+                        Icons.credit_card,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 8,
+                      left: 8,
+                      right: 8,
+                      child: Text(
+                        "Cartão virtual",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Card(
+              elevation: 0,
+              color: Color.fromARGB(50, 255, 255, 255),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Icon(
+                      Icons.lock_open,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    right: 8,
+                    child: Text(
+                      "Bloquear cartão",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Card(
+              elevation: 0,
+              color: Color.fromARGB(50, 255, 255, 255),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Icon(
+                      Icons.account_balance_wallet,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    right: 8,
+                    child: Text(
+                      "Pagar",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Card(
+              elevation: 0,
+              color: Color.fromARGB(50, 255, 255, 255),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Icon(
+                      Icons.monetization_on,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    right: 8,
+                    child: Text(
+                      "Depositar",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Card(
+              elevation: 0,
+              color: Color.fromARGB(50, 255, 255, 255),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Icon(
+                      Icons.attach_money,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    right: 8,
+                    child: Text(
+                      "Cobrar",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Card(
+              elevation: 0,
+              color: Color.fromARGB(50, 255, 255, 255),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Icon(
+                      Icons.account_balance,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    right: 8,
+                    child: Text(
+                      "Transferir",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Card(
+              elevation: 0,
+              color: Color.fromARGB(50, 255, 255, 255),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Icon(
+                      Icons.line_weight,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    right: 8,
+                    child: Text(
+                      "Ajustar limite",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Card(
+              elevation: 0,
+              color: Color.fromARGB(50, 255, 255, 255),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Icon(
+                      Icons.person_add,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    right: 8,
+                    child: Text(
+                      "Indicar amigos",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: SizedBox(
+              width: 100,
+              height: 100,
+              child: Card(
+                elevation: 0,
+                color: Color.fromARGB(50, 255, 255, 255),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      top: 8,
+                      left: 8,
+                      child: Icon(
+                        Icons.filter_list,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 8,
+                      left: 8,
+                      right: 8,
+                      child: Text(
+                        "Organizar atalhos",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
