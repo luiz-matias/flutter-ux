@@ -7,3 +7,5 @@ Neste repositório, estou deixando todos os códigos que estou utilizando para a
 - Projetos pessoais feitos do zero.
 
 
+## Apps com layouts refeitos no flutter:
+<img src="readmesrc/nubank.gif" width="300"> <img src="readmesrc/instagram.gif" width="300">
