@@ -22,6 +22,34 @@ class _HomePageState extends State<HomePage> {
           top: 24,
           left: 0,
           right: 0,
+          child: Container(
+            height: 200,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Color(0xFF121212), Colors.lightBlue[900]],
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 24,
+          left: 0,
+          right: 0,
+          child: Container(
+            height: 200,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Color(0xFF121212), Color(0x00121212)],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 24,
+          left: 0,
+          right: 0,
           bottom: 60,
           child: _homeFeed(),
         ),
