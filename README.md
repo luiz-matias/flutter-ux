@@ -15,5 +15,5 @@ Neste repositório, estou deixando todos os códigos que estou utilizando para a
 <img src="readmesrc/instagram.gif" width="300">
 
 ### Profile Screen
-Feito por Joshua Oluwagbemiga (https://www.uplabs.com/posts/profile-2styles-xd-freebie)
+Conceito criado por Joshua Oluwagbemiga (https://www.uplabs.com/posts/profile-2styles-xd-freebie)
 <img src="readmesrc/profile_clone.gif" width="300">
