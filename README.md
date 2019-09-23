@@ -1,8 +1,9 @@
 # Flutter UX
-Neste repositório, estou deixando todos os códigos que estou utilizando para aprender sobre o Flutter, principalmente sobre layouts e UX utilizando o poder dos componentes do Flutter. Aqui terá desde layouts feitos do zero até clones de layouts de aplicativos famosos.
+Neste repositório, estou deixando todos os códigos que estou utilizando para aprender sobre layouts e componentização no Flutter. Aqui tem layouts feitos do zero, implementações de conceitos de designers do UPLabs, Bechance, etc. e clones de layouts de aplicativos famosos.
 
 ## O que você pode encontrar de útil por aqui
 - Imitações de aplicativos famosos feitos em Flutter (Instagram, Nubank, etc.).
+- Animações complexas de usabilidade.
 - Projetos pessoais feitos do zero.
 
 
@@ -12,3 +13,7 @@ Neste repositório, estou deixando todos os códigos que estou utilizando para a
 
 ### Instagram
 <img src="readmesrc/instagram.gif" width="300">
+
+### Profile Screen
+Feito por Joshua Oluwagbemiga (https://www.uplabs.com/posts/profile-2styles-xd-freebie)
+<img src="readmesrc/profile_clone.gif" width="300">
