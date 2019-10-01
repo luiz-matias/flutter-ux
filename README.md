@@ -18,6 +18,7 @@ Neste repositório, estou deixando todos os códigos que estou utilizando para a
 Conceito criado por Joshua Oluwagbemiga (https://www.uplabs.com/posts/profile-2styles-xd-freebie)
 <img src="readmesrc/profile_clone.gif" width="300">
 
-### Profile Screen
+### Instagram Redesign
 Conceito criado por Xitij Thakkar (https://dribbble.com/xitijdesign)
+
 <img src="readmesrc/instagram-redesign.gif" width="300">
