@@ -18,23 +18,25 @@ class _PostPageState extends State<PostPage> {
   Widget build(BuildContext context) {
     return Material(
       child: SizedBox.expand(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 24,
-            ),
-            _toolbar(),
-            Hero(
-              tag: imageIndex,
-              child: Image.asset(
-                "assets/images/image${imageIndex + 1}.jpg",
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 24,
               ),
-            ),
-            _postInfo(),
-          ],
+              _toolbar(),
+              Hero(
+                tag: imageIndex,
+                child: Image.asset(
+                  "assets/images/image${imageIndex + 1}.jpg",
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              _postInfo(),
+            ],
+          ),
         ),
       ),
     );
@@ -96,6 +98,95 @@ class _PostPageState extends State<PostPage> {
   }
 
   _postInfo() {
-    return Container();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        _postActions(),
+        _postDescription(),
+        _postComments(),
+      ],
+    );
+  }
+
+  _postActions() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            Icons.favorite,
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Icon(Icons.add_comment),
+          SizedBox(
+            width: 16,
+          ),
+          Icon(Icons.send),
+          Expanded(
+            child: Container(),
+          ),
+          Icon(Icons.bookmark_border),
+        ],
+      ),
+    );
+  }
+
+  _postDescription() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+      child: RichText(
+        text: TextSpan(
+          text: "@_luizmatias: ",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
+          children: [
+            TextSpan(
+              text: "Just a Lorem ipsum dolor sit amet in your screen... Follow me on instagram 🎉",
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 14),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _postComments() {
+    return Opacity(
+      opacity: 0.5,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+        child: Column(
+          children: <Widget>[
+            _comment(),
+            _comment(),
+            _comment(),
+            _comment(),
+            _comment(),
+            _comment(),
+            _comment(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _comment() {
+    return Padding(
+      padding: EdgeInsets.only(top: 8),
+      child: RichText(
+        text: TextSpan(
+          text: "@_somesampleuser ",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
+          children: [
+            TextSpan(
+              text: "Another one Lorem ipsum dolor sit amet",
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 14),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
