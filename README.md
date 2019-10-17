@@ -16,6 +16,7 @@ Neste repositório, estou deixando todos os códigos que estou utilizando para a
 
 ### Profile Screen
 Conceito criado por Joshua Oluwagbemiga (https://www.uplabs.com/posts/profile-2styles-xd-freebie)
+
 <img src="readmesrc/profile_clone.gif" width="300">
 
 ### Instagram Redesign
