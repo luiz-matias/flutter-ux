@@ -42,6 +42,8 @@ class _AppHomepageState extends State<AppHomepage> {
           _destinationCarrousel(),
           _topDestinationsHeader(),
           _topDestinationsContent(),
+          _mostLikedDestinationsHeader(),
+          _topDestinationsContent()
         ],
       ),
     );
@@ -105,7 +107,7 @@ class _AppHomepageState extends State<AppHomepage> {
             blurRadius: 30,
             spreadRadius: 1)
       ]),
-      height: 100,
+      height: 56,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -333,4 +335,31 @@ class _AppHomepageState extends State<AppHomepage> {
       ),
     );
   }
+
+  _mostLikedDestinationsHeader() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Text(
+            "Most liked",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          GestureDetector(
+            onTap: () {
+              print("On see all click!");
+            },
+            child: Text(
+              "See All",
+              style: TextStyle(fontSize: 14, color: Colors.lightBlue),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 }
