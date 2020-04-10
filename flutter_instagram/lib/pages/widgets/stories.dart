@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/pages/story/story.dart';
 
 class Stories extends StatefulWidget {
   @override
@@ -114,58 +115,67 @@ class _StoriesState extends State<Stories> {
   }
 
   Widget _storyItem(String username, String profilePicture, bool storySeen) {
-    return Container(
-      width: 84,
-      color: Colors.white,
-      child: Padding(
-        padding: EdgeInsets.only(top: 8, bottom: 8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              width: 64,
-              height: 64,
-              child: Stack(
-                children: <Widget>[
-                  Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: storySeen
-                              ? LinearGradient(
-                                  colors: [Colors.grey, Colors.grey])
-                              : LinearGradient(colors: [
-                                  Colors.deepOrange,
-                                  Colors.deepPurple
-                                ])),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => StoryPage(),
+          )
+        );
+      },
+      child: Container(
+        width: 84,
+        color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.only(top: 8, bottom: 8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: 64,
+                height: 64,
+                child: Stack(
+                  children: <Widget>[
+                    Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: storySeen
+                                ? LinearGradient(
+                                    colors: [Colors.grey, Colors.grey])
+                                : LinearGradient(colors: [
+                                    Colors.deepOrange,
+                                    Colors.deepPurple
+                                  ])),
+                      ),
                     ),
-                  ),
-                  Center(
-                    child: Container(
-                      width: storySeen ? 62 : 60,
-                      height: storySeen ? 62 : 60,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.white),
+                    Center(
+                      child: Container(
+                        width: storySeen ? 62 : 60,
+                        height: storySeen ? 62 : 60,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                      ),
                     ),
-                  ),
-                  Center(
-                    child: CircleAvatar(
-                      radius: 28,
-                      backgroundImage: NetworkImage(profilePicture),
+                    Center(
+                      child: CircleAvatar(
+                        radius: 28,
+                        backgroundImage: NetworkImage(profilePicture),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 6,
-            ),
-            Text(
-              username,
-              style: TextStyle(fontSize: 12),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+              SizedBox(
+                height: 6,
+              ),
+              Text(
+                username,
+                style: TextStyle(fontSize: 12),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
       ),
     );

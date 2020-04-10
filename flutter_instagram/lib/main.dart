@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/pages/story/story.dart';
 import 'pages/main_page.dart';
 
 void main() => runApp(MyApp());
