@@ -16,8 +16,7 @@ Neste repositório, estou deixando todos os códigos que estou utilizando para a
 
 ### Instagram
 
-<img src="readmesrc/instagram.gif" width="300">
-<img src="readmesrc/instagram_story.gif" width="300">
+<img src="readmesrc/instagram.gif" height="600"> <img src="readmesrc/instagram_story.gif" height="600">
 
 ### Profile Screen
 
