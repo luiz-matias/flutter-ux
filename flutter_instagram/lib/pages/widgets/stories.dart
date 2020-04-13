@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/pages/story/story.dart';
+import 'package:flutter_instagram/domain/entities/story.dart';
+import 'package:flutter_instagram/domain/entities/user.dart';
 
 class Stories extends StatefulWidget {
   @override
@@ -20,39 +21,38 @@ class _StoriesState extends State<Stories> {
               children: <Widget>[
                 _myStoryItem(),
                 _storyItem(
-                  "sampleuser",
-                  "https://randomuser.me/api/portraits/men/27.jpg",
-                  false,
-                ),
-                _storyItem(
-                  "otheruser",
-                  "https://randomuser.me/api/portraits/men/91.jpg",
-                  false,
-                ),
-                _storyItem(
-                  "moreuser",
-                  "https://randomuser.me/api/portraits/women/60.jpg",
-                  false,
-                ),
-                _storyItem(
-                  "heyguys",
-                  "https://randomuser.me/api/portraits/women/58.jpg",
-                  true,
-                ),
-                _storyItem(
-                  "flutter",
-                  "https://randomuser.me/api/portraits/women/27.jpg",
-                  true,
-                ),
-                _storyItem(
-                  "is",
-                  "https://randomuser.me/api/portraits/men/51.jpg",
-                  true,
-                ),
-                _storyItem(
-                  "awesome",
-                  "https://randomuser.me/api/portraits/men/60.jpg",
-                  true,
+                  [
+                    Story(
+                      id: 1,
+                      duration: 3,
+                      user: User(
+                          id: 1,
+                          username: "@_luizmatias",
+                          user: "Luiz Matias",
+                          profilePicture:
+                              "https://images.unsplash.com/photo-1464746133101-a2c3f88e0dd9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80"),
+                      postedAt: 1586726739000,
+                      content:
+                          "https://images.unsplash.com/photo-1535865633289-347f691bb824?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80",
+                      contentType: 1,
+                      seen: false,
+                    ),
+                    Story(
+                      id: 2,
+                      duration: 3,
+                      user: User(
+                          id: 1,
+                          username: "@_luizmatias",
+                          user: "Luiz Matias",
+                          profilePicture:
+                              "https://images.unsplash.com/photo-1464746133101-a2c3f88e0dd9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80"),
+                      postedAt: 1586759154000,
+                      content:
+                          "https://images.unsplash.com/photo-1558573030-bf8ad79522b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
+                      contentType: 1,
+                      seen: false,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -114,15 +114,8 @@ class _StoriesState extends State<Stories> {
     );
   }
 
-  Widget _storyItem(String username, String profilePicture, bool storySeen) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => StoryPage(),
-          )
-        );
-      },
+  Widget _storyItem(List<Story> stories) {
+    return Material(
       child: Container(
         width: 84,
         color: Colors.white,
@@ -140,7 +133,7 @@ class _StoriesState extends State<Stories> {
                       child: Container(
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            gradient: storySeen
+                            gradient: stories[0].seen
                                 ? LinearGradient(
                                     colors: [Colors.grey, Colors.grey])
                                 : LinearGradient(colors: [
@@ -151,16 +144,38 @@ class _StoriesState extends State<Stories> {
                     ),
                     Center(
                       child: Container(
-                        width: storySeen ? 62 : 60,
-                        height: storySeen ? 62 : 60,
+                        width: stories[0].seen ? 62 : 60,
+                        height: stories[0].seen ? 62 : 60,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle, color: Colors.white),
                       ),
                     ),
                     Center(
-                      child: CircleAvatar(
-                        radius: 28,
-                        backgroundImage: NetworkImage(profilePicture),
+                      child: Hero(
+                        tag: "content_${stories[0].id}",
+                        child: Container(
+                          width: 1,
+                          height: 1,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(stories[0].content),
+                                  fit: BoxFit.contain)),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          "/story",
+                          arguments: stories,
+                        );
+                      },
+                      child: Center(
+                        child: CircleAvatar(
+                          radius: 28,
+                          backgroundImage:
+                              NetworkImage(stories[0].user.profilePicture),
+                        ),
                       ),
                     ),
                   ],
@@ -170,7 +185,7 @@ class _StoriesState extends State<Stories> {
                 height: 6,
               ),
               Text(
-                username,
+                stories[0].user.username.replaceAll("@", ""),
                 style: TextStyle(fontSize: 12),
                 overflow: TextOverflow.ellipsis,
               ),
