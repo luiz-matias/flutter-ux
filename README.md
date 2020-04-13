@@ -1,6 +1,6 @@
 # Flutter UX
 
-Neste repositório, estou deixando todos os códigos que estou utilizando para aprender sobre layouts e componentização no Flutter. Aqui tem layouts feitos do zero, implementações de conceitos de designers do UPLabs, Bechance, etc. e clones de layouts de aplicativos famosos.
+Neste repositório, estou deixando todos os códigos que estou utilizando para aprender sobre layouts e componentização no Flutter. Aqui tem layouts feitos do zero, implementações de conceitos de designers do UPLabs, Behance, etc. e clones de layouts de aplicativos famosos.
 
 ## O que você pode encontrar de útil por aqui
 
