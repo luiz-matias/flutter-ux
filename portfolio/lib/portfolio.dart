@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:portfolio/phone_mockup_page.dart';
+import 'package:portfolio/phone_mockup_page_with_video.dart';
+import 'package:video_player/video_player.dart';
 
 class PortfolioPage extends StatefulWidget {
   @override
@@ -13,6 +15,7 @@ class _PortfolioPageState extends State<PortfolioPage>
   double _width, _height;
   double _scrollSizeFactor = 10;
   double _maxValue;
+
   ScrollController _scrollController = new ScrollController();
   double _progress = 0;
   AnimationController _startingAnimationController;
@@ -22,15 +25,18 @@ class _PortfolioPageState extends State<PortfolioPage>
   Animation<double> solidToTransparentBackgroundAnimation;
   Animation<double> solidToTransparentProgresBarAnimation;
 
-  Animation<Alignment> moveCenterLeftToTopLeftAnimation;
-  Animation<double> sizeToHalfAnimation;
-  Animation<double> decreaseOSLogosSizeAnimation;
-  Animation<Alignment> moveRightCenterToLeftCenterAnimation;
-
-  Animation<double> sizeZeroToOneAnimation;
-  Animation<Alignment> moveLeftCenterToCenterAnimation;
+  Animation<Alignment> titleAlignmentAnimation;
+  Animation<double> titleSizeAnimation;
+  Animation<double> OSLogosSizeAnimation;
+  Animation<Alignment> phoneAlignmentAnimation;
+  Animation<double> phoneSizeAnimation;
+  Animation<double> phoneRotationAnimation;
+  Animation<double> multiplePhonesSizeAnimation;
+  Animation<Alignment> multiplePhonesAlignmentAnimation;
 
   //endregion
+
+
 
   @override
   void initState() {
@@ -40,12 +46,12 @@ class _PortfolioPageState extends State<PortfolioPage>
         vsync: this,
         lowerBound: 0,
         upperBound: 1,
-        duration: Duration(milliseconds: 2000));
+        duration: Duration(milliseconds: 3000));
 
     _animationController = new AnimationController(
         vsync: this,
         lowerBound: 0,
-        upperBound: 0.1,
+        upperBound: 0.3,
         duration: Duration(milliseconds: 3000));
 
     setupAnimations();
@@ -61,7 +67,7 @@ class _PortfolioPageState extends State<PortfolioPage>
       }
     });
 
-    Future.delayed(Duration(seconds: 10))
+    Future.delayed(Duration(seconds: 1))
         .then((value) => _startingAnimationController.forward());
   }
 
@@ -99,7 +105,7 @@ class _PortfolioPageState extends State<PortfolioPage>
       ),
     );
 
-    moveCenterLeftToTopLeftAnimation =
+    titleAlignmentAnimation =
         new Tween(begin: Alignment.centerLeft, end: Alignment.topLeft).animate(
       new CurvedAnimation(
         parent: _animationController,
@@ -111,7 +117,7 @@ class _PortfolioPageState extends State<PortfolioPage>
       ),
     );
 
-    sizeToHalfAnimation = new Tween(begin: 1.0, end: 0.3).animate(
+    titleSizeAnimation = new Tween(begin: 1.0, end: 0.3).animate(
       new CurvedAnimation(
         parent: _animationController,
         curve: new Interval(
@@ -122,7 +128,7 @@ class _PortfolioPageState extends State<PortfolioPage>
       ),
     );
 
-    decreaseOSLogosSizeAnimation = new Tween(begin: 1.0, end: 0.0).animate(
+    OSLogosSizeAnimation = new Tween(begin: 1.0, end: 0.0).animate(
       new CurvedAnimation(
         parent: _animationController,
         curve: new Interval(
@@ -133,20 +139,54 @@ class _PortfolioPageState extends State<PortfolioPage>
       ),
     );
 
-    moveRightCenterToLeftCenterAnimation =
-        new Tween(begin: Alignment.centerRight, end: Alignment.centerLeft)
-            .animate(
+    phoneAlignmentAnimation = new TweenSequence([
+      TweenSequenceItem(
+          tween: Tween<Alignment>(
+                  begin: Alignment.centerRight, end: Alignment.centerLeft)
+              .chain(CurveTween(curve: Curves.easeOut)),
+          weight: 0.5),
+      TweenSequenceItem(
+          tween: Tween<Alignment>(
+                  begin: Alignment.centerLeft, end: Alignment.centerLeft)
+              .chain(CurveTween(curve: Curves.linear)),
+          weight: 1),
+      TweenSequenceItem(
+          tween: Tween<Alignment>(
+                  begin: Alignment.centerLeft, end: Alignment.center)
+              .chain(CurveTween(curve: Curves.easeInOut)),
+          weight: 0.5),
+    ]).animate(
       new CurvedAnimation(
         parent: _animationController,
-        curve: new Interval(
-          0.0,
-          0.05,
-          curve: Curves.easeInOut,
-        ),
+        curve: new Interval(0.0, 0.2),
       ),
     );
 
-    sizeZeroToOneAnimation = new Tween(begin: 0.0, end: 1.0).animate(
+    phoneSizeAnimation = new TweenSequence([
+      TweenSequenceItem(
+          tween: Tween<double>(begin: 1.0, end: 3.0)
+              .chain(CurveTween(curve: Curves.easeInOut)),
+          weight: 1),
+    ]).animate(
+      new CurvedAnimation(
+        parent: _animationController,
+        curve: new Interval(0.17, 0.25),
+      ),
+    );
+
+    phoneRotationAnimation = new TweenSequence([
+      TweenSequenceItem(
+          tween: Tween<double>(begin: 0.0, end: 0.25)
+              .chain(CurveTween(curve: Curves.easeInOut)),
+          weight: 1),
+    ]).animate(
+      new CurvedAnimation(
+        parent: _animationController,
+        curve: new Interval(0.17, 0.25),
+      ),
+    );
+
+    multiplePhonesSizeAnimation = new Tween(begin: 0.0, end: 1.0).animate(
       new CurvedAnimation(
         parent: _animationController,
         curve: new Interval(
@@ -157,14 +197,14 @@ class _PortfolioPageState extends State<PortfolioPage>
       ),
     );
 
-    moveLeftCenterToCenterAnimation =
+    multiplePhonesAlignmentAnimation =
         new Tween(begin: Alignment.centerLeft, end: Alignment.centerRight)
             .animate(
       new CurvedAnimation(
         parent: _animationController,
         curve: new Interval(
           0.05,
-          0.1,
+          0.09,
           curve: Curves.easeOut,
         ),
       ),
@@ -264,9 +304,9 @@ class _PortfolioPageState extends State<PortfolioPage>
       bottom: 0,
       right: 0,
       child: AlignTransition(
-        alignment: moveCenterLeftToTopLeftAnimation,
+        alignment: titleAlignmentAnimation,
         child: ScaleTransition(
-          scale: sizeToHalfAnimation,
+          scale: titleSizeAnimation,
           alignment: Alignment.centerLeft,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -305,7 +345,7 @@ class _PortfolioPageState extends State<PortfolioPage>
             right: 0,
             child: ScaleTransition(
               alignment: Alignment.center,
-              scale: decreaseOSLogosSizeAnimation,
+              scale: OSLogosSizeAnimation,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -331,11 +371,18 @@ class _PortfolioPageState extends State<PortfolioPage>
       top: 80,
       bottom: 80,
       child: AlignTransition(
-        alignment: moveRightCenterToLeftCenterAnimation,
-        child: PhoneMockupPage(
-          phoneContent:
-              "https://raw.githubusercontent.com/luiz-matias/flutter-ux/master/readmesrc/profile_clone.gif",
-          width: 400,
+        alignment: phoneAlignmentAnimation,
+        child: ScaleTransition(
+          scale: phoneSizeAnimation,
+          alignment: Alignment.center,
+          child: RotationTransition(
+            turns: phoneRotationAnimation,
+            alignment: Alignment.center,
+            child: PhoneMockupPageWithVideo(
+              videoUrl: 'videos/profile_clone.mp4',
+              width: 400,
+            ),
+          ),
         ),
       ),
     );
@@ -348,41 +395,36 @@ class _PortfolioPageState extends State<PortfolioPage>
       top: 80,
       bottom: 80,
       child: AlignTransition(
-        alignment: moveLeftCenterToCenterAnimation,
+        alignment: multiplePhonesAlignmentAnimation,
         child: ScaleTransition(
-          scale: sizeZeroToOneAnimation,
+          scale: multiplePhonesSizeAnimation,
           alignment: Alignment.center,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              PhoneMockupPage(
-                phoneContent:
-                    "https://raw.githubusercontent.com/luiz-matias/flutter-ux/master/readmesrc/nubank.gif",
+              PhoneMockupPageWithVideo(
+                videoUrl: "videos/profile_clone.mp4",
                 width: 300,
               ),
-              PhoneMockupPage(
-                phoneContent:
-                    "https://raw.githubusercontent.com/luiz-matias/flutter-ux/master/readmesrc/profile_clone.gif",
+              PhoneMockupPageWithVideo(
+                videoUrl: "videos/profile_clone.mp4",
                 width: 300,
               ),
               _width >= 1280
-                  ? PhoneMockupPage(
-                      phoneContent:
-                          "https://raw.githubusercontent.com/luiz-matias/flutter-ux/master/readmesrc/nubank.gif",
+                  ? PhoneMockupPageWithVideo(
+                videoUrl: "videos/profile_clone.mp4",
                       width: 300,
                     )
                   : Container(),
               _width >= 1600
-                  ? PhoneMockupPage(
-                      phoneContent:
-                          "https://raw.githubusercontent.com/luiz-matias/flutter-ux/master/readmesrc/profile_clone.gif",
+                  ? PhoneMockupPageWithVideo(
+                videoUrl: "videos/profile_clone.mp4",
                       width: 300,
                     )
                   : Container(),
               _width >= 1920
-                  ? PhoneMockupPage(
-                      phoneContent:
-                          "https://raw.githubusercontent.com/luiz-matias/flutter-ux/master/readmesrc/nubank.gif",
+                  ? PhoneMockupPageWithVideo(
+                videoUrl: "videos/profile_clone.mp4",
                       width: 300,
                     )
                   : Container(),
